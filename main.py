@@ -11,6 +11,7 @@ DATABASE = '/tmp/flsite.db'
 DEBUG = True
 SECRET_KEY = 'fdgfh78@#5?>gfhf89dx,v06k'
 
+#print( url_for('оброботчик(имя фцнкции в кот вызывается') ) возвращает url адрес
 app=Flask(__name__)
 app.config.from_object(__name__)
 
@@ -64,10 +65,11 @@ def close_db(error):
 def index():
     return render_template('index.html', menu = dbase.getMenu(), post=dbase.getPostsAnonce(current_user.get_id()), title= 'psuTests')
 
+
 def simple_test(ans):
     line = ""
     itog = ""
-    var_answers = "АБВГДЕЖЗИКЛМНОПРСТУФХКЦЧШЩЭЮЯ"
+    var_answers = "абвгдежзийклмнопрстуфхцычшщая"
     line = ans.readline()
     while True:
         line = ans.readline()
@@ -75,7 +77,7 @@ def simple_test(ans):
         if not line:
             break
 
-        if line[0] in var_answers and line[1] == ")" and line[-2] == "*":
+        if line[0].lower() in var_answers and line[1] == ")" and line[-2] == "*":
             itog += line[0] + line[1] + "*\n"
         else:
             itog += line[0] + line[1] + "\n"
@@ -140,7 +142,7 @@ def vstav():
 
     linevst = questvst.readline()
 
-    if linevst[2] == "В" and linevst[3] == "с":
+    if linevst[2] == "в" and linevst[3] == "с":
         itog.write(linevst)
         questvst.close()
         questvst = open("quest.txt", "r", encoding="utf-16")
@@ -154,7 +156,7 @@ def smpl():
     questsmpl = open("quest.txt", "r", encoding="utf-16")
     linesmpl = questsmpl.readline()
 
-    if len(linesmpl) >= 4 and linesmpl[2] == "В" and linesmpl[3] == "ы":
+    if len(linesmpl) >= 4 and linesmpl[2].lower() == "в" and linesmpl[3].lower() == "ы":
         itog.write(linesmpl)
         questsmpl.close()
         questsmpl = open("quest.txt", "r", encoding="utf-16")
@@ -168,7 +170,7 @@ def sootv():
     questsootv = open("quest.txt", "r", encoding="utf-16")
     linesootv = questsootv.readline()
 
-    if len(linesootv) >= 4 and linesootv[2] == "У" and linesootv[3] == "с":
+    if len(linesootv) >= 4 and linesootv[2].lower() == "у" and linesootv[3].lower() == "с":
         itog.write(linesootv)
         questsootv.close()
         questsootv = open("quest.txt", "r", encoding="utf-16")
@@ -182,8 +184,27 @@ def sootv():
     else:
         questsootv.close()
 
+    ###############################################
+
+
+# a = open("example_simple.txt", "r",encoding = "utf-8")
+# g = simple_test(a)
+# print (g)
+##print("------------------------")
+##a.close()
+##
+##
+# a = open("example_vstavka.txt", "r",encoding = "utf-8")
+# b=vstavka_slova_predlozhenia(a)
+# print(b)
+##a.close()
+##print("------------------------")
+##a = open("example_sootv.txt", "r",encoding = "utf-8")
+##c = sootv(a)
+##print(c.items())
 
 def parse(text):
+    global itog
     test = open("full_test.txt", "w", encoding="utf-8")
     test.write(text)
     test.close()
@@ -224,7 +245,7 @@ def parse(text):
     itog.write("\n")
     quest.close()
     quest = open("quest.txt", "r", encoding="utf-16")
-    imt = quest.read()
+    p = quest.read()
     quest.close()
     print(g)
     # quest = open("quest.txt","w+",encoding = "utf-16")
@@ -240,7 +261,7 @@ def parse(text):
     os.remove("full_test.txt")
     os.remove("quest.txt")
     os.remove("itog.txt")
-    return imt
+    return p
 
 
 @app.route("/upload", methods=["POST", "GET"])
