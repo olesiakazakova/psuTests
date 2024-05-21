@@ -119,7 +119,7 @@
 <li>
 <h2 class="title"><a href="{{ url_for('showPost', id_post=p.id)}}">{{p.themes}}</a></h2>
 <h3 class="title">{{p.classes}}</h3>
-        <p class="annonce">{{ p.text.decode('utf-8')[:80]}}</p>
+        <p class="annonce">{{ p.text[:20]}}</p>
 </li>
 {% endfor %}
 </ul>
