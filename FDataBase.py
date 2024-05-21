@@ -19,13 +19,11 @@ class FDataBase:
             print("Ошибка чтения из БД")
         return []
 
+
     def addPost(self, users, classes, themes, text):
-        if not text:
-            return False
         try:
             tm = math.floor(time.time())
-            binary = sqlite3.Binary(text)
-            self.__cur.execute("INSERT INTO posts VALUES(NULL,?, ?, ?, ?, ?)", (users, classes, themes, binary, tm))
+            self.__cur.execute("INSERT INTO posts VALUES(NULL,?, ?, ?, ?, ?)", (users, classes, themes, text, tm))
             self.__db.commit()
         except sqlite3.Error as e:
             print("Ошибка добавления заданий в БД " + str(e))
@@ -99,3 +97,4 @@ class FDataBase:
             print("Ошибка получения данных из БД " + str(e))
 
         return False
+
