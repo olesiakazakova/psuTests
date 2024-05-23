@@ -1,21 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>{{title}}</title>
-    <style>
-               h2 { text-align: center }
-        h3 { text-align: center }
+        <style>
+        h2 {
+            text-align: center;
+            font-size: 25px;
+            padding: 1px;
+        }
+
+        h4 {
+            background-color: #ffffff;
+            padding: 10px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 30px;
+            padding: 1px;
+        }
+
+        ul.post {
+           margin: 10px 40px 40px 40px;
+            border: 5px solid #ffffff;
+            border-radius: 15px;
+            background: #fff;
+        }
+
+        input[type=submit] {
+            background-color: #D48166;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+         textarea {
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        .modal{
+            position: fixed; top: 50%; left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        input[type=text] {
+            border: 1px solid #373A36;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        input[type=text]:focus {
+            border: 3px solid #555;
+        }
+
+        p { text-indent: 30px }
+
+        pre { margin: 20px }
+
         body {
-            font-family: 'Arial';
+            font-family: "Franklin Gothic";
+            font-weight: 300;
             margin: 0;
-            padding 0;
+            padding: 0;
             height: 100%;
             width: 100%;
+            background: #E6E2DD;
+            font-size: 15px
         }
 
         a {
-            color: #556B2F;
+            color: #373A36;
             text-decoration: none;
         }
 
@@ -26,21 +92,25 @@
 
         .clear {clear: both;}
 
-         ul.mainmenu {
+       ul.mainmenu {
             list-style: none;
-            background: #AAD77D;
+            background: #D48166;
             height: 60px;
             margin: 0;
             padding: 0;
             color: #000000;
             font-size: 25px;
             overflow: hidden;
+            font-family: 'Impact';
+            font-weight: 50;
         }
 
         ul.mainmenu li1 {
              float: left;
              margin: 10px 40px 40px 40px;
              border: 5px solid #ffffff;
+             border-radius: 15px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
              background: #ffffff;
         }
 
@@ -74,12 +144,38 @@
                 font-size: 16px;
         }
 
-        .flash {padding: 10px;}
+        ul.list-posts {
+            list-style: none;
+            margin-left: auto;
+            margin-right: auto;
+            width: 6em
+            padding 0;
+            max-width: 600px;
+        }
+        ul.list-posts li {
+            margin: 20px 0 0 0;
+            border: 5px solid #D48166;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        ul.list-posts .title {
+             margin: 0;
+             padding: 5px;
+             background: #fff;
+        }
+        ul.list-posts .annonce {
+            margin: 0;
+            padding: 10px 5px 10px 5px;
+        }
+
+          .flash {padding: 10px;}
         .flash.success {
+            text-align: center;
              border: 1px solid #21DB56;
             background: #AEFFC5;
         }
         .flash.error {
+            text-align: center;
             border: 1px solid #FF4343;
             background: #FF9C9C;
         }
@@ -91,11 +187,11 @@
     <li1> <a href="{{m.url}}">{{m.title}}</a></li1>
     {% endfor %}
 </ul>
-<h2>{{title}}</h2>
+<h3>{{title}}</h3>
 {% for cat, msg in get_flashed_messages(True) %}
 <div class="flash {{cat}}">{{msg}}</div>
 {% endfor %}
-<form action="" method="post" class="form-contact">
+<form class="modal" action="" method="post" class="form-contact">
 <p><label>Email: </label> <input type="text" name="email" value="" requied />
 <p><label>Пароль: </label> <input type="password" name="psw" value="" requied />
 <p><input type="checkbox" name="remainme" /> Запомнить меня
