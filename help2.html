@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<h3>{{title}}</h3>
+<ul class="post">
+    <img src="{{url_for('static',filename='img/reg.PNG')}}" width="30%" align="center"  hspace="10%" vspace="10%" alt = ' '/>
+</ul>
+{% endblock %}
